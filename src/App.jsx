@@ -3,44 +3,46 @@ import React, { useState } from "react";
 import ShowWeather from "./Components/ShowWeather";
 import useFetch from "./Hooks/useFetch";
 import Loading from "./Components/Loading";
+import Content from "./Components/Content";
+import InputField from "./Components/InputField";
 
 const App = () => {
+
   // States
   const [city, setcity] = useState("");
 
-  const { data, loading, error, fetchData } = useFetch(`http://api.weatherapi.com/v1/current.json?key=0b9d2407a7a44eeaa2c134317243006&q=${city}`);
-  console.log(data)
+  // Onchange function
+  const handleChange = (e) => {
+    setcity(e.target.value);
+  };
+
+  // Use usefetch custom hook
+  const { data, loading, error, fetchData } = useFetch(
+    `http://api.weatherapi.com/v1/current.json?key=0b9d2407a7a44eeaa2c134317243006&q=${city}`
+  );
+ 
+  // if loading is true
   if (loading) {
-    return <Loading/>
+    return <Loading />;
   }
+
+  // if error ocusers 
   if (error) {
-    return <div className="flex justify-center items-center">{error}</div>
+    return <div className="flex justify-center items-center">{error}</div>;
   }
+
   return (
-    <div className="h-screen w-full bg-slate-50 flex lg:flex-row flex-col items-center">
-      <div className="content w-[60%] lg:[50%] h-[30%] flex flex-col items-center justify-center">
-        <img className="object-contain  w-[50%]" src={"/hero.png"} alt="" />
-        <h1 className="lg:text-4xl text-2xl font-semibold text-center lg:py-10">
-          Weather <span className="text-blue-700 font-[800]">Cheaker</span> App
-        </h1>
-      </div>
-      <div className="app w-full lg:w-[50%]">
-        <div className="search-field h-[20%] flex items-center justify-center  lg:mx-0 lg:mr-10">
-        <input
-          className="w-[80%] rounded-s-md bg-transparent border border-blue-700 py-2 px-2"
-          placeholder="Enter city"
-          type="text"
+    <div className="h-screen w-full py-6 bg-black text-white flex lg:flex-row flex-col lg:gap-5 items-center px-5 lg:px-24">
+      <Content />
+      <div className="app w-full h-[60%] flex flex-col justify-start items-center lg:w-[50%]">
+        <InputField
           value={city}
-          onChange={(e) => {
-            setcity(e.target.value);
-          }}
+          onChange={handleChange}
+          fetchData={fetchData}
         />
-        <FaSearch onClick={fetchData} className="text-2xl w-[20%] h-[42px] py-2 rounded-e-md bg-blue-700"/>
-        </div>
-      {
-        data &&
-        <ShowWeather current={data.current} location={data.location} />
-      }
+        {data && (
+          <ShowWeather current={data.current} location={data.location} />
+        )}
       </div>
     </div>
   );
