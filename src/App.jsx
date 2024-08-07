@@ -18,7 +18,7 @@ const App = () => {
 
   // Use usefetch custom hook
   const { data, loading, error, fetchData } = useFetch(
-    `http://api.weatherapi.com/v1/current.json?key=156ba8419fcb4be388774417240708&q=${city}`
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?key=VXM2PXWY34BMP4UTRJR66MJFR `
   );
  
   // if loading is true
