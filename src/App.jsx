@@ -20,6 +20,8 @@ const App = () => {
   const { data, loading, error, fetchData } = useFetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?key=VXM2PXWY34BMP4UTRJR66MJFR `
   );
+  console.log(data);
+  
  
   // if loading is true
   if (loading) {
@@ -41,7 +43,7 @@ const App = () => {
           fetchData={fetchData}
         />
         {data && (
-          <ShowWeather current={data.current} location={data.location} />
+          <ShowWeather current={data.currentConditions} location={data.resolvedAddress} />
         )}
       </div>
     </div>
