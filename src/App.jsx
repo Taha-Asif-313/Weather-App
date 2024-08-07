@@ -18,7 +18,7 @@ const App = () => {
 
   // Use usefetch custom hook
   const { data, loading, error, fetchData } = useFetch(
-    `http://api.weatherapi.com/v1/current.json?key=0b9d2407a7a44eeaa2c134317243006&q=${city}`
+    `http://api.weatherapi.com/v1/current.json?key=156ba8419fcb4be388774417240708&q=${city}`
   );
  
   // if loading is true
