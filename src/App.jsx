@@ -5,6 +5,7 @@ import useFetch from "./Hooks/useFetch";
 import Loading from "./Components/Loading";
 import Content from "./Components/Content";
 import InputField from "./Components/InputField";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
 
@@ -30,7 +31,7 @@ const App = () => {
 
   // if error ocusers 
   if (error) {
-    return <div className="flex justify-center items-center">{error}</div>;
+    return toast.error(error);
   }
 
   return (
@@ -46,6 +47,7 @@ const App = () => {
           <ShowWeather current={data.currentConditions} location={data.resolvedAddress} />
         )}
       </div>
+      <Toaster/>
     </div>
   );
 };
